@@ -8,6 +8,12 @@ import ImagePopup from './ImagePopup';
 import '../index.css';
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -29,16 +35,8 @@ function App() {
     setSelectedCard(null);
   }
   function handleCardClick(card) {
-    console.log(card);
     setSelectedCard(card);
   }
-
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
-
-  const [selectedCard, setSelectedCard] = useState(null);
 
   return (
     <div className="page">
@@ -54,6 +52,7 @@ function App() {
       <PopupWithForm
         title="Редактировать профиль"
         name="edit"
+        buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
@@ -79,18 +78,12 @@ function App() {
           required
         />
         <span className="popup__input-error about-input-error"></span>
-        <button
-          type="submit"
-          aria-label="Сохранить информацию"
-          className="popup__save-button"
-        >
-          Сохранить
-        </button>
       </PopupWithForm>
 
       <PopupWithForm
         title="Новое место"
         name="adding"
+        buttonText="Сохранить"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
@@ -114,18 +107,12 @@ function App() {
           required
         />
         <span className="popup__input-error link-input-error"></span>
-        <button
-          type="submit"
-          aria-label="Сохранить информацию"
-          className="popup__save-button"
-        >
-          Сохранить
-        </button>
       </PopupWithForm>
 
       <PopupWithForm
         title="Обновить аватар"
         name="change"
+        buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
@@ -138,34 +125,17 @@ function App() {
           required
         />
         <span className="popup__input-error avatar-input-error"></span>
-
-        <button
-          type="submit"
-          aria-label="Сохранить аватар"
-          className="popup__save-button"
-        >
-          Сохранить
-        </button>
       </PopupWithForm>
 
       <PopupWithForm
         title="Вы уверены?"
         name="delete"
+        buttonText="Да"
         isOpen={isDeleteCardPopupOpen}
         onClose={closeAllPopups}
-      >
-        <button
-          type="submit"
-          aria-label="Удались карточку"
-          className="popup__save-button popup__save-button_type_delete"
-        >
-          Да
-        </button>
-      </PopupWithForm>
+      ></PopupWithForm>
 
-      {selectedCard && (
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-      )}
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
   );
 }

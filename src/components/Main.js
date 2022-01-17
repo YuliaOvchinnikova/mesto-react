@@ -9,33 +9,45 @@ function Main({
   onDeleteCard,
   onCardClick,
 }) {
-  const [userName, setUserName] = useState();
-  const [userDescription, setUserDescription] = useState();
-  const [userAvatar, setUserAvatar] = useState();
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getUserInfo().then((res) => {
-      setUserName(res.name);
-      setUserDescription(res.about);
-      setUserAvatar(res.avatar);
-    });
+    api
+      .getUserInfo()
+      .then((res) => {
+        setUserName(res.name);
+        setUserDescription(res.about);
+        setUserAvatar(res.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    api.getInitialCards().then((cards) => {
-      setCards(cards);
-    });
-  });
+    api
+      .getInitialCards()
+      .then((cards) => {
+        setCards(cards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__about-person">
-          <div className="profile__photo-container interactive-button">
+          <div
+            className="profile__photo-container interactive-button"
+            onClick={onEditAvatar}
+          >
             <img
               src={userAvatar}
-              alt="Лицо улыбающейся девушки."
+              alt="Аватар пользователя"
               className="profile__photo"
-              onClick={onEditAvatar}
             />
           </div>
 
