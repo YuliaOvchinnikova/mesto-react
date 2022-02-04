@@ -1,40 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Card from './Card.js';
-import api from '../utils/Api.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Main({
   onEditProfile,
   onAddPlace,
   onEditAvatar,
-  onDeleteCard,
   onCardClick,
+  cards,
+  onCardLike,
+  onCardDelete,
 }) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    api
-      .getInitialCards()
-      .then((cards) => {
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content">
@@ -45,21 +22,21 @@ function Main({
             onClick={onEditAvatar}
           >
             <img
-              src={userAvatar}
+              src={currentUser.avatar}
               alt="Аватар пользователя"
               className="profile__photo"
             />
           </div>
 
           <div className="profile__info">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               type="button"
               aria-label="Редактировать профайл"
               className="interactive-button profile__edit-button"
               onClick={onEditProfile}
             ></button>
-            <p className="profile__about">{userDescription}</p>
+            <p className="profile__about">{currentUser.about}</p>
           </div>
         </div>
         <button
@@ -75,8 +52,9 @@ function Main({
           <Card
             card={card}
             onCardClick={onCardClick}
-            onDeleteCard={onDeleteCard}
+            onDeleteCard={onCardDelete}
             key={card._id}
+            onCardLike={onCardLike}
           />
         ))}
       </section>

@@ -52,3 +52,11 @@
 @import url('./blocks/popup/__save-button/_type_delete/popup__save-button_type_delete.css');
 @import url('./blocks/popup/__save-button/_disabled/popup__save-button_disabled.css');
 @import url('./blocks/interactive-button/interactive-button.css');
+
+.card__delete-button_visible {
+  visibility: visible;
+}
+
+.card__delete-button_hidden {
+  visibility: hidden;
+}
