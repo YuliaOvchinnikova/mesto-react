@@ -1,6 +1,6 @@
 # mesto-react
 
-This project for travelers, where you can load your new visited place photos with its name. Also you can edit person info and like place photos, open big version photos.
+This project for travelers, where you can load your new visited place photos with its name. Also you can edit person info and like and delete place photos, open big version photos.
 There are form validation, closing popups by Escape and overlay.
 
 There is @media for adaptive website layout.
@@ -15,7 +15,7 @@ Files was organized by methos BEM.
 
 Webpack was installed. npm run build packs all your project to folder dist.
 
-[Link to Github Pages](https://yuliaovchinnikova.github.io/mesto/)
+[Link to Github Pages](https://yuliaovchinnikova.github.io/mesto-react/)
 
 Application was made by create react app.
 

@@ -1,9 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const nameInputRef = useRef();
   const linkInputRef = useRef();
+
+  useEffect(() => {
+    nameInputRef.current.value = '';
+    linkInputRef.current.value = '';
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
